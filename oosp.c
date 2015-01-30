@@ -78,35 +78,6 @@ static void usage( void )
 	PACKAGE_NAME, PACKAGE_VERSION, PACKAGE_NAME, PACKAGE_BUGREPORT );
 }
 
-static void print_node_attributes( xmlNode *node )
-{
-	xmlAttr *attr  = NULL;
-	xmlChar *value = NULL;
-
-	if ( !node )
-		return;
-
-	attr = node->properties;
-	while( attr && attr->name && attr->children ) {
-		value = xmlNodeListGetString( node->doc, attr->children, 1 );
-		printf( "attribute: '%s', value: '%s'\n", attr->name, value );
-		xmlFree( value );
-		attr = attr->next;
-	}
-}
-
-static void print_element_names( xmlNode *a_node )
-{
-	xmlNode *cur_node = NULL;
-
-	for (cur_node = a_node; cur_node; cur_node = cur_node->next) {
-		if (cur_node->type == XML_ELEMENT_NODE)
-			printf( "node type: Element, name: %s\n",
-				cur_node->name );
-		print_node_attributes( cur_node );
-	}
-}
-
 xmlNode *find_node( xmlNode *parent, const char *name )
 {
 	xmlNode *iter = NULL;
@@ -507,30 +478,6 @@ int main( int argc, char **argv )
 
 	/* root element node */
 	root = xmlDocGetRootElement( servers );
-
-	// print_element_names( root );
-	// print_node_attributes( root->children->next );
-
-	// cur_node = find_node( root, "client" );
-	// str = get_node_attribute( cur_node, "ip" );
-	// if ( str )
-	// 	printf( "ip: %s\n", str );
-	// xmlFree( str );
-	// str = NULL;
-
-	// cur_node = find_node( root, "server-config" );
-	// str = get_node_attribute( cur_node, "threadcount" );
-	// if ( str )
-	// 	printf( "threadcount: %s\n", str );
-	// xmlFree( str );
-	// str = NULL;
-
-	// cur_node = find_node( root, "licensekey" );
-	// str = get_node_content( cur_node );
-	// if ( str )
-	// 	printf( "licensekey: %s\n", str );
-	// xmlFree( str );
-	// str = NULL;
 
 	cur_node = find_node( root, "servers" );
 	for ( cur_node = find_node( cur_node, "server" );
