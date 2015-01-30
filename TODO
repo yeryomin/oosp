@@ -1,0 +1,7 @@
+* latency test
+* automatic (best) server selection
+* automatic detection of upload size?
+* time limit based test (closer to original speedtest behaviour)?
+* random data in upload buffer?
+* daemon
+* TODOs inside the code

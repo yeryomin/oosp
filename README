@@ -1,0 +1,6 @@
+Installation
+------------
+
+./autogen.sh
+CFLAGS+=-I/usr/include/libxml2 ./configure
+make
